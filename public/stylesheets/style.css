@@ -1,7 +1,6 @@
 
 .thumbnail img{
   max-height: 150px;
-  padding-top: 10px;
 }
 
 .thumbnail .description{
@@ -11,9 +10,4 @@
 .price{
   font-weight: bold;
   font-size: 16px;
-}
-
-.border{
-  margin-top:  30px;
-  margin-left: auto;
 }
