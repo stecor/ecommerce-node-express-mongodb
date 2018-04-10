@@ -8,6 +8,8 @@ var logger = require('morgan');
 var expressHbs = require('express-handlebars');
 var mongoose = require('mongoose');
 var session = require('express-session');
+var passport = require('passport');
+var flash = require('connect-flash');
 
 
 var indexRouter = require('./routes/index');
@@ -17,11 +19,14 @@ var app = express();
 const config = require("./config.js");
 
 
-//mongoose.connect('mongodb://localhost:27017/shopping');
+mongoose.connect('mongodb://localhost:27017/shopping');
 
-mongoose.connect(config.db, ()=>{
-  console.log("connected to database");
-})
+//mongoose.connect(config.db, ()=>{
+//  console.log("connected to database");
+//});
+
+require('./config/passport');
+
 
 // app.listen(config.port, ()=>{
 //   console.log("listening on " + config.port);
@@ -37,7 +42,10 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(session({secret: 'mysupersecret', resave: false, saveUnitialized: false}));
+app.use(session({secret: 'mysupersecret', resave: false, saveUninitialized: false}));
+app.use(flash());
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
