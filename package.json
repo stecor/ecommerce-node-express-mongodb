@@ -3,7 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "deploy": "now --public"
   },
   "dependencies": {
     "cookie-parser": "~1.4.3",
@@ -14,5 +15,15 @@
     "http-errors": "~1.6.2",
     "mongoose": "^5.0.13",
     "morgan": "~1.9.0"
+  },
+  "devDependencies": {
+    "dotenv": "^5.0.1"
+  },
+  "now": {
+    "alias":"shopping",
+    "name": "shopping",
+    "env": {
+      "DB": "@db"
+    }
   }
 }

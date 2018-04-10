@@ -1,3 +1,5 @@
+require('dotenv/config')
+
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -10,7 +12,19 @@ var indexRouter = require('./routes/index');
 
 var app = express();
 
-mongoose.connect('mongodb://localhost:27017/shopping');
+const config = require("./config.js");
+
+
+//mongoose.connect('mongodb://localhost:27017/shopping');
+
+mongoose.connect(config.db, ()=>{
+  console.log("connected to database");
+})
+
+// app.listen(config.port, ()=>{
+//   console.log("listening on " + config.port);
+// })
+
 
 // view engine setup
 //app.set('views', path.join(__dirname, 'views'));
